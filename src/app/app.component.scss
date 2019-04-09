@@ -1,0 +1,25 @@
+#swap-button {
+  position: relative;
+  width: 4px;
+  height: 4px;
+  align-self: center;
+
+  button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 10;
+    transform: translate3d(-50%, -50%, 0);
+
+    height: 40px;
+    padding: 0 8px;
+    border-radius: 50%;
+  }
+}
+
+@media screen and (max-width: 420px) {
+  #swap-button {
+    margin-left: 40px;
+    width: 100%;
+  }
+}

@@ -1,0 +1,23 @@
+<ng-container [(formGroup)]="fg">
+  <div class="formfield" [class.formfield-invalid]="fg.controls[name].touched && fg.controls[name].status === 'INVALID'"
+    matAutocompleteOrigin #origin="matAutocompleteOrigin">
+    <div class="formfield-input">
+      <div class="formfield-icon">
+        <mat-icon svgIcon="compass"></mat-icon>
+      </div>
+      <input [id]="name" type="text" [placeholder]="placeholder" [formControlName]="name" [matAutocomplete]="auto"
+        [matAutocompleteConnectedTo]="origin" [readonly]="isMobile" (click)="openPlaceDialog()">
+      <label class="formfield-label" [for]="name"></label>
+    </div>
+  </div>
+</ng-container>
+
+<mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" [displayWith]="displayFn">
+  <ng-container *ngIf="placeService.places[name]">
+    <mat-optgroup *ngFor="let country of placeService.places[name].countrys" [label]="country">
+      <mat-option *ngFor="let place of placeService.places[name].places[country]" [value]="place">
+        {{place.n}}
+      </mat-option>
+    </mat-optgroup>
+  </ng-container>
+</mat-autocomplete>

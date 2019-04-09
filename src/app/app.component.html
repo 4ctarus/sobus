@@ -1,20 +1,53 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{ title }}!
-  </h1>
-  <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-  </li>
-</ul>
+<h1 class="page-title">Réservez vos billets de bus</h1>
+<h2 class="page-subtitle">Voyagez moins cher en France et en Europe</h2>
 
+<form class="form" [formGroup]="searchFG" (ngSubmit)="onSubmit()">
+
+  <app-place-input [(fg)]="searchFG" placeholder="D'où partez-vous ?" name="from" [isMobile]="isMobile">
+  </app-place-input>
+
+  <div id="swap-button">
+    <button type="button" class="button" (click)="swapCity()">
+      <mat-icon svgIcon="compare"></mat-icon>
+    </button>
+  </div>
+
+  <app-place-input [(fg)]="searchFG" placeholder="Où allez-vous ?" name="to" [isMobile]="isMobile"></app-place-input>
+
+  <div class="formfield" [class.formfield-invalid]="searchFG.controls['when'].touched && searchFG.controls['when'].status === 'INVALID'">
+    <div class="formfield-date" (click)="whenPicker.open()">
+      <label class="formfield-icon" for="when">
+        <mat-icon svgIcon="calendar"></mat-icon>
+      </label>
+      <input id="when" type="text" placeholder="(date de départ)" formControlName="when" [matDatepicker]="whenPicker"
+        [min]="today" readonly>
+    </div>
+  </div>
+
+  <div class="formfield" [class.formfield-invalid]="searchFG.controls['who'].touched && searchFG.controls['who'].status === 'INVALID'">
+    <div class="formfield-number">
+      <label class="formfield-icon" for="who">
+        <mat-icon [svgIcon]="this.searchFG.get('who').value <= 1 ? 'user' : 'users'"></mat-icon>
+      </label>
+      <button class="button" type="button" (click)="removePassenger()" [disabled]="this.searchFG.get('who').value <= 1">
+        <mat-icon svgIcon="minus"></mat-icon>
+      </button>
+      <input id="who" type="number" formControlName="who" placeholder="Passager" min="1">
+      <button class="button" type="button" (click)="addPassenger()">
+        <mat-icon svgIcon="plus"></mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button class="button" type="submit" [class.button-onprocess]="onProcess" [disabled]="!searchFG.valid || onProcess">
+      <span>Rechercher</span>
+      <mat-icon *ngIf="!onProcess; else processLoader" svgIcon="search"></mat-icon>
+      <ng-template #processLoader>
+        <mat-spinner></mat-spinner>
+      </ng-template>
+    </button>
+  </div>
+</form>
+
+<mat-datepicker #whenPicker [touchUi]="isMobile"></mat-datepicker>

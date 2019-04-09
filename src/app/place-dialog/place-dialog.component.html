@@ -1,0 +1,18 @@
+<form (ngSubmit)="onSubmit()">
+  <button (click)="closeDialog()" type="button">
+    <mat-icon svgIcon="back"></mat-icon>
+  </button>
+  <input cdkFocusInitial id="city" name="city" type="text" placeholder="Tapez votre ville" [(ngModel)]="cityInput"
+    (ngModelChange)="cityInputChange($event)">
+</form>
+
+<div class="autocomplete-suggestions" *ngIf="placeService.places[data.fragment]">
+  <div class="autocomplete-country" *ngFor="let country of placeService.places[data.fragment].countrys">
+    <span>{{ country }}</span>
+
+    <div class="autocomplete-city" *ngFor="let place of placeService.places[data.fragment].places[country]"
+      (click)="onSubmit(place)">
+      <span>{{ place.n }}</span>
+    </div>
+  </div>
+</div>

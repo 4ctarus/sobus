@@ -1,0 +1,51 @@
+:host {
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  button {
+    padding: 8px;
+    margin-left: 8px;
+    border: 0;
+    background: none;
+  }
+
+  input {
+    flex: 1;
+    border: 0;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 16px;
+  }
+}
+
+.autocomplete-suggestions {
+  overflow-y: auto;
+
+  .autocomplete-country {
+    display: flex;
+    flex-direction: column;
+
+    &>span {
+      padding: 8px 16px;
+      background: #ebebed;
+      font-weight: 600;
+    }
+  }
+
+  .autocomplete-city  {
+    padding: 8px 16px;
+    min-height: 48px;
+    padding-left: 32px;
+    border-bottom: 1px solid #ebebed;
+    display: flex;
+    align-items: center;
+  }
+}

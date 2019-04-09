@@ -1,1 +1,201 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700');
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Lato', sans-serif;
+  padding: 16px;
+  width: 100vw;
+  height: 100vh;
+}
+
+.form {
+  padding: 8px;
+  background-color: white;
+  border-radius: 4px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+
+  .form-actions {
+    display: flex;
+    flex-wrap: wrap;
+
+    *+* {
+      margin-left: 4px;
+    }
+  }
+}
+
+.form-actions,
+.formfield {
+  margin: 4px 8px;
+}
+
+app-place-input {
+  flex: 1
+}
+
+.formfield {
+  color: rgba(0, 0, 0, .87);
+  flex: 1;
+  min-width: 180px;
+
+  &.formfield-invalid {
+    color: red;
+
+    .formfield-input,
+    .formfield-number,
+    .formfield-date {
+      border-color: red;
+      color: red;
+    }
+  }
+
+  .formfield-input,
+  .formfield-number,
+  .formfield-date {
+    position: relative;
+    border-radius: 4px;
+    display: flex;
+    background-color: #f5f5f5;
+    border: solid 1px rgba(0, 0, 0, 0);
+
+    input {
+      background: none;
+      border: none;
+      padding: 16px 8px;
+      width: 100%;
+      outline: none;
+      flex: 1;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .formfield-icon {
+      width: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: text;
+
+      &+input {
+        padding-left: 0;
+      }
+    }
+
+    .formfield-label {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    button.button {
+      color: inherit;
+      background: none;
+      padding: 0 8px;
+      height: auto;
+      justify-content: center;
+
+      &[disabled]:not(.button-onprocess) {
+        background: none;
+      }
+    }
+  }
+}
+
+
+button.button {
+  font-weight: 600;
+  border: none;
+  border-radius: 4px;
+  padding: 0 16px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #4c9ff5;
+  color: white;
+  transition: background .4s cubic-bezier(.25, .8, .25, 1);
+
+  mat-icon,
+  mat-spinner {
+    fill: currentColor;
+
+    &:first-child:not(:last-child) {
+      margin-right: 32px;
+    }
+
+    &:last-child:not(:first-child) {
+      margin-left: 32px;
+    }
+  }
+
+  mat-spinner {
+    width: 24px !important;
+    height: 24px !important;
+
+    svg {
+      width: inherit !important;
+      height: inherit !important;
+      padding: 4px;
+
+      circle {
+        stroke: currentColor;
+      }
+    }
+  }
+
+  &[disabled]:not(.button-onprocess) {
+    background-color: rgba(0, 0, 0, .12);
+    color: rgba(0, 0, 0, .26);
+  }
+}
+
+.mat-autocomplete-panel {
+
+  .mat-option,
+  .mat-optgroup>label {
+    white-space: normal;
+    line-height: normal;
+    padding: 8px 16px;
+    min-height: 48px;
+    height: auto;
+    font-family: 'Lato', sans-serif;
+
+    &.mat-active {
+      font-weight: 600;
+    }
+  }
+
+  .mat-optgroup>label {
+    padding: 8px 16px;
+    background: #ebebed;
+    font-weight: 600;
+    color: inherit;
+    min-height: auto;
+  }
+}
+
+.place-dialog {
+  mat-dialog-container {
+    padding: 0;
+    border-radius: 0;
+  }
+}
+
+.mat-calendar-body-selected {
+  background-color: #4c9ff5;
+}
