@@ -30,7 +30,7 @@ export class AppComponent implements OnInit {
       this.resizeTimer.unsubscribe();
     }
     this.resizeTimer = timer(500).subscribe(t => {
-      this.isMobile = event.target.innerWidth <= 720;
+      this.isMobile = event.target.innerWidth <= 998;
     });
   }
 
