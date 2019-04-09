@@ -91,6 +91,7 @@ app-place-input {
       align-items: center;
       justify-content: center;
       cursor: text;
+      flex-shrink: 0;
 
       &+input {
         padding-left: 0;
@@ -115,6 +116,13 @@ app-place-input {
       &[disabled]:not(.button-onprocess) {
         background: none;
       }
+    }
+  }
+
+  .formfield-number {
+    input {
+      width: 80px;
+      flex: auto;
     }
   }
 }
